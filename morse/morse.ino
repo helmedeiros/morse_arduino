@@ -17,19 +17,39 @@ void setup() {
   pinMode(ACTIVE_PORT, OUTPUT);
 }
 
-void on(int port){
+void on(int port, int duration){
   digitalWrite(port, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);              // wait for a second
+  delay(duration);              // wait for a second
 }
 
-void off(int port){
+void off(int port, int duration){
   digitalWrite(port, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);              // wait for a second
+  delay(duration);              // wait for a second
+}
+
+void shortOn(int port){
+  on(port, 500);
+  off(ACTIVE_PORT, 500); 
+}
+
+void longOn(int port){
+  on(port, 1000);
+  off(ACTIVE_PORT, 500); 
+}
+
+void blickTheLetterIn(String letter, int port){
+   if ( letter.equals("s") ){
+      shortOn(port);
+      shortOn(port);
+      shortOn(port);
+   }
 }
 
 // the loop function runs over and over again forever
 void loop() {
-  on(ACTIVE_PORT);
-  off(ACTIVE_PORT);
-  off(ACTIVE_PORT);
+  longOn(ACTIVE_PORT);
+  longOn(ACTIVE_PORT);
+  longOn(ACTIVE_PORT);
+  off(ACTIVE_PORT, 500);
+  off(ACTIVE_PORT, 500);
 }
