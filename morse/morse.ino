@@ -10,6 +10,8 @@
   This example code is in the public domain.
  */
 const int ACTIVE_PORT = 13;
+String S = "...";
+String O = "---";
 
 // the setup function runs once when you press reset or power the board
 void setup() {
@@ -38,18 +40,17 @@ void longOn(int port){
 }
 
 void blickTheLetterIn(String letter, int port){
-   if ( letter.equals("s") ){
-      shortOn(port);
-      shortOn(port);
-      shortOn(port);
-   }
+    for (int i = 0; i < letter.length(); i++){
+      if (letter.charAt(i) == '.'){
+          shortOn(ACTIVE_PORT);
+      }else{
+           longOn(ACTIVE_PORT);
+      }
+    } 
 }
 
 // the loop function runs over and over again forever
 void loop() {
-  longOn(ACTIVE_PORT);
-  longOn(ACTIVE_PORT);
-  longOn(ACTIVE_PORT);
-  off(ACTIVE_PORT, 500);
-  off(ACTIVE_PORT, 500);
+  blickTheLetterIn(S, ACTIVE_PORT);
+  off(ACTIVE_PORT, 700);
 }
